@@ -2,7 +2,9 @@ package com.demo;
 
 import com.demo.utils.Boolean;
 import com.demo.utils.ConditionalOperator;
+import com.demo.utils.Factorial;
 import com.demo.utils.MultiwayIfElse;
+import com.demo.utils.RandomPractice;
 import com.demo.utils.SelectionStatements;
 import com.demo.utils.StringCompare;
 import com.demo.utils.SwitchStatement;
@@ -30,7 +32,13 @@ public class Demo {
 		//boolean1.Beep();
 		
 		WhileForDoWhile whileForDoWhile = new WhileForDoWhile();
-		whileForDoWhile.Beep();
+		//whileForDoWhile.Beep();
+		
+		RandomPractice randomPractice = new RandomPractice();
+		//randomPractice.Beep();
+		
+		Factorial factorial = new Factorial();
+		factorial.Beep();
 	}
 
 }
