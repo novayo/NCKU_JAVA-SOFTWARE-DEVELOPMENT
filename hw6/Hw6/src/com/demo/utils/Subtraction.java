@@ -8,22 +8,22 @@ public class Subtraction implements IOperation{
 		
 		boolean isNegtive = false;
 		if (num1.charAt(0) != '-' && num2.charAt(0) != '-') {
-			if (num1.compareTo(num2) < 0) isNegtive = true;
+			if (num1.length() < num2.length() || (num1.compareTo(num2) < 0) && num1.length() == num2.length()) isNegtive = true;
 		} else if (num1.charAt(0) != '-' && num2.charAt(0) == '-') {
 			num2 = num2.substring(1);
-			if (num1.compareTo(num2) < 0) isNegtive = true;
+			if (num1.length() < num2.length() || (num1.compareTo(num2) < 0) && num1.length() == num2.length()) isNegtive = true;
 		} else if (num1.charAt(0) == '-' && num2.charAt(0) != '-') {
 			num1 = num1.substring(1);
-			if (num1.compareTo(num2) < 0) isNegtive = false;
+			if (num1.length() < num2.length() || (num1.compareTo(num2) < 0) && num1.length() == num2.length()) isNegtive = false;
 			else isNegtive = true;
 		} else if (num1.charAt(0) == '-' && num2.charAt(0) == '-') {
 			num1 = num1.substring(1);
 			num2 = num2.substring(1);
-			if (num1.compareTo(num2) < 0) isNegtive = false;
+			if (num1.length() < num2.length() || (num1.compareTo(num2) < 0) && num1.length() == num2.length()) isNegtive = false;
 			else isNegtive = true;
 		}
 		
-		if (num1.compareTo(num2) < 0) {
+		if (num1.length() < num2.length() || (num1.compareTo(num2) < 0) && num1.length() == num2.length()) {
 			String tmpString = num1;
 			num1 = num2;
 			num2 = tmpString;

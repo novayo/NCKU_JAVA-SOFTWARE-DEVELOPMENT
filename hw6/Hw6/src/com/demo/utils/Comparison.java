@@ -12,7 +12,8 @@ public class Comparison implements IOperation{
 			return "-1";
 		} else {
 			Subtraction utilSubtraction = new Subtraction();
-			return utilSubtraction.perform(num1, num2);
+			if (utilSubtraction.perform(num1.substring(1), num2.substring(1)).charAt(0) == '-') return "1";
+			else return "-1";
 		}
 	}
 	
