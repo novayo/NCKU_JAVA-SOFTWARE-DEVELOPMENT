@@ -1,10 +1,16 @@
 package com.demo;
 
+import java.util.Scanner;
+
 public class Main {
 
 	public static void main(String[] args) {
-		char firstInputString = args[0].charAt(0);
-		String indexString = args[0].substring(2);
+		Scanner scanner = new Scanner(System.in);
+		String args1 = scanner.nextLine();
+		
+		
+		char firstInputString = args1.charAt(0);
+		String indexString = args1.substring(2);
 		
 		int index = Integer.parseInt(indexString);
 		

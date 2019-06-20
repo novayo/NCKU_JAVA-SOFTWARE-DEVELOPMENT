@@ -3,16 +3,23 @@ package com.main.item;
 import java.awt.Rectangle;
 
 import com.main.GameParameter;
+import com.main.Handler;
+import com.main.Id;
 
 public abstract class Item implements GameParameter{
 	
 	protected int x, y, width, height;
 	protected Id id;
 	protected Handler handler;
-	protected static int moveSpeedfloor1 = 4;
-	protected static int moveSpeedfloor2 = 5;
-	protected static int moveSpeedfloor3 = 6;
-	protected static int moveSpeedfloor4 = 7;
+	protected int sheetLength = 0; // 動畫格數的長度
+	protected int animation = 0;
+	protected int animationDelay = 0;
+	protected int animation_speed = 0;
+	protected int velY;
+	public static int moveSpeedfloor1 = 3;
+	public static int moveSpeedfloor2 = 2;
+	public static int moveSpeedfloor3 = 4;
+	public static int moveSpeedfloor4 = 6;
 	
 	public Item(Id id, Handler handler, int x, int y, int width, int height) {
 		this.id = id;

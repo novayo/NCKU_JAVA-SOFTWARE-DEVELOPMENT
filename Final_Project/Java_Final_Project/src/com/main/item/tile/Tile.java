@@ -3,39 +3,66 @@ package com.main.item.tile;
 import java.awt.Rectangle;
 
 import com.main.Game;
-import com.main.item.Handler;
-import com.main.item.Id;
+import com.main.Handler;
+import com.main.Id;
 import com.main.item.Item;
+import com.main.item.entity.Entity;
 
-public abstract class Tile extends Item{
+public abstract class Tile extends Item {
 
-	protected final int animation_speed = 20; // 每 (1/animation_speed) 秒 地板就往左走一格
-	protected int animationDelay = 0;
+	protected int moveSpeed = 0;
 	protected int three_floor_x[] = new int[3];
 	protected int tmp_maxObstaclesOnScreen = Game.maxObstaclesOnScreen;
 	protected boolean isHitByPlayer = false;
-	protected boolean isScoreAdd = false;
-	private int velY;
-	
+	private boolean done = false;
+
 	public Tile(Id id, Handler handler, int x, int y, int width, int height) {
 		super(id, handler, x, y, width, height);
 	}
-	
+
 	public void die() {
 		handler.removeTile(this);
-		if (Game.GAME_NOT_STARTED == false) {
-			Game.numOfObstacles--; // 每死掉一個障礙物，就讓值-1
+	}
+
+	public void doScoreCompute() {
+		if (Game.GAME_NOT_STARTED == false && done == false) {
+			for (int i = 0; i < Game.handler.entityLinkedList.size(); i++) {
+				Entity entity = Game.handler.entityLinkedList.get(i);
+				if (entity.getId() == Id.Dino_Stand_Run || entity.getId() == Id.Dino_Squart || entity.getId() == Id.Tontoko_Player) {
+					if (x <= entity.getX() - entity.getWidth() - 40) {
+						if (isHitByPlayer == true) {
+							Game.game_bonus = 1;
+						} else if (isHitByPlayer == false) {
+							@SuppressWarnings("unused")
+							AddScore addScore = new AddScore(Id.AddScore, Game.handler, x, y, 100, 60, Game.game_bonus);
+						}
+						done = true;
+					}
+				}
+			}
 		}
 	}
-	
+
+	public void doAnimation() {
+		animationDelay++;
+		x -= moveSpeed;
+
+		if (animationDelay >= animation_speed / 2) {
+			animation++;
+			if (animation >= sheetLength) {
+				animation = 0;
+			}
+			animationDelay = 0;
+		}
+	}
+
 	@Override
 	public Rectangle getBounds() {
 		return new Rectangle(x, y, width, height);
 	}
 
-	
-	
-	/* Getters and Setters
+	/*
+	 * Getters and Setters
 	 * 
 	 */
 	public int getVelY() {
@@ -62,28 +89,12 @@ public abstract class Tile extends Item{
 		this.three_floor_x = three_floor_x;
 	}
 
-	public int getTmp_maxObstaclesOnScreen() {
-		return tmp_maxObstaclesOnScreen;
-	}
-
-	public void setTmp_maxObstaclesOnScreen(int tmp_maxObstaclesOnScreen) {
-		this.tmp_maxObstaclesOnScreen = tmp_maxObstaclesOnScreen;
-	}
-
 	public boolean isHitByPlayer() {
 		return isHitByPlayer;
 	}
 
 	public void setHitByPlayer(boolean isHitByPlayer) {
 		this.isHitByPlayer = isHitByPlayer;
-	}
-
-	public boolean isScoreAdd() {
-		return isScoreAdd;
-	}
-
-	public void setScoreAdd(boolean isScoreAdd) {
-		this.isScoreAdd = isScoreAdd;
 	}
 
 	public int getAnimation_speed() {
